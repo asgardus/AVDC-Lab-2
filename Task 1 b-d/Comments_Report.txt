@@ -1,0 +1,3 @@
+Task 1a Results comments:
+
+The integrator has a weird result because of the bank angle at the Lunda airfield. The accelerometer always has a component of the bank angle and that eroors keeps adding up in the integrator with time.
