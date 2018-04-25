@@ -1,9 +1,9 @@
 function xdot=bicycle_estimator(t,x)
 
-global vbox_file_name Cf Cr lf lr mass Iz SWA_VBOX vx_VBOX Time
+global vbox_file_name Cf Cr lf lr mass Iz WA_VBOX vx_VBOX Time
 
 r=find(Time>=t);%,1,'first');
-delta_t = SWA_VBOX(r(1));
+delta_t = WA_VBOX(r(1));
 vx = vx_VBOX(r(1));
 
 xdot(1,:)=x(2); % y-speed

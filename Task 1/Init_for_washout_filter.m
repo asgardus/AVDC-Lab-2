@@ -87,6 +87,7 @@ rollGrad=5*(pi/180);% Rollangle rad per g (rad/g)
 rx=0.4;             % Distance from IMU to CoG x-axle (m)
 ry=0;               % Distance from IMU to CoG y-axle (m)
 rz=0;               % Distance from IMU to CoG z-axle (m)
+Ks=17;              % Steering gear Ratio
 
 %--------------------------------------
 % SET ENVIRONEMNTAL PARAMETERS FOR TEST
