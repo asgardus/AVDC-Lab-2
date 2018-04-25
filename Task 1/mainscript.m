@@ -2,8 +2,8 @@ Init_for_washout_filter;
 
 global WA_VBOX vx_VBOX Time
 
-WA_VBOX = SWA_VBOX./Ks
-SWA_VBOX_mat = [Time WA_VBOX];
+WA_VBOX = SWA_VBOX./Ks; %steering angle delta
+WA_VBOX_mat = [Time WA_VBOX]; %steering angle mat file (delta) timeseries
 yawRate_VBOX_mat = [Time yawRate_VBOX];
 vx_VBOX_mat = [Time vx_VBOX];
 ay_VBOX_mat = [Time ay_VBOX];
