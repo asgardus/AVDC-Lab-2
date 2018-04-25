@@ -1,6 +1,6 @@
 Init_for_washout_filter;
 
-global vbox_file_name Cf Cr lf lr mass Iz WA_VBOX vx_VBOX Time
+global WA_VBOX vx_VBOX Time
 
 WA_VBOX = SWA_VBOX./Ks
 SWA_VBOX_mat = [Time WA_VBOX];
@@ -15,9 +15,9 @@ T = Time(end)+0.01;
 T_w = 1;
 
 %% MATLAB Bicycle Model Estimator
-[timeout,xout]=ode45('bicycle_estimator_mat', t, x0);
-vy = xout(:,1);
-beta_bicycle_mat = [Time atan(vy./vx)];
+% [timeout,xout]=ode45('bicycle_estimator_mat', t, x0);
+% vy = xout(:,1);
+% beta_bicycle_mat = [Time atan(vy./vx)];
 % 
 % %% Simulink Integrator Estimator
 % sim('integrator_estimator');

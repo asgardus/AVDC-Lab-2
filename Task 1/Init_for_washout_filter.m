@@ -12,8 +12,8 @@ disp(' ');
 
 % Set global variables so that they can be accessed from other matlab
 % functions and files
-global vbox_file_name Cf Cr lf lr mass Iz SWA_VBOX vx_VBOX Time
-
+global vbox_file_name Cf Cr lf lr mass Iz vx_VBOX Time
+%%
 %----------------------------
 % LOAD DATA FROM VBOX SYSTEM
 %----------------------------
@@ -65,7 +65,7 @@ vboload
 %  Channel 39 = pitchrate
 %  Channel 40 = rollrate
 %  Channel 41 = z_accel
-
+%%
 %-----------------------------------
 % SET VEHICLE DATA FOR THE VOLVO V40
 %-----------------------------------
