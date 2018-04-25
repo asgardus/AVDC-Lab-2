@@ -1,3 +1,9 @@
+Task 1a:
+
+1. Assumpions in bicycle model - Recorded data vx and SWA are accurate.
+
+2. Assumptions in integrator - Recorded data yawRate, vx and ay are accurate.
+
 Task 1a Results comments:
 
 The integrator has a weird result because of the bank angle at the Lunda airfield. The accelerometer always has a component of the bank angle and that eroors keeps adding up in the integrator with time.

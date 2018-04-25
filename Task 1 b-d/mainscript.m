@@ -35,5 +35,3 @@ sim('Estimator_Model');
 len = [length(beta_integrator_main.Data) length(beta_bicycle_sim_main.Data) length(beta_washout_main.Data) length(Beta_VBOX)];
 figure(1);
 plot(Time, Beta_VBOX, Time, beta_integrator_main.Data, Time, beta_bicycle_sim_main.Data, Time, beta_washout_main.Data);
-figure(2);
-plot(Time, Beta_VBOX, Time, beta_bicycle_sim_main.Data);
