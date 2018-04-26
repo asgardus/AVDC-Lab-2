@@ -11,7 +11,7 @@ Beta_VBOX_mat = [Time Beta_VBOX];
 vx = vx_VBOX;
 t = Time;
 x0 = [-0.0103 0.1244 0.00052 0];
-T = Time(end)+0.01;
+T = Time(end);%+0.01;
 T_w = 1;
 
 %% MATLAB Bicycle Model Estimator
@@ -36,10 +36,25 @@ T_w = 1;
 %     Cf = Cf_tune(i);
 %     for j=1:length(Cr_tune)
 %         Cr = Cr_tune(j);
-        sim('Estimator_Model');
+%         sim('Estimator_Model');
 %     end
 % end
-
+%% Mean squared error
+for i=1:200
+        tw(i)=i*0.5;
+        T_w=i*0.5;
+         sim('Estimator_Model');
+        err(i) = immse(beta_washout_main.data,Beta_VBOX);
+       % CALCULATE THE ERROR VALES FOR THE ESTIMATE OF SLIP ANGLE
+%--------------------------------------------------------- [e_beta_mean,e_beta_max,time_at_max,error] = errorCalc(YOUR BETA, Beta_VBOX);
+disp(' ');
+fprintf('The MSE of Beta estimation is: %d \n',e_beta_mean);
+fprintf('The Max error of Beta estimation is: %d \n',e_beta_max);
+end
+figure (2)        
+plot(tw,err)
+hold on
+grid on
 %% Plot results
 figure(1);
 plot(Time, Beta_VBOX, Time, beta_bicycle_sim_main.Data);
