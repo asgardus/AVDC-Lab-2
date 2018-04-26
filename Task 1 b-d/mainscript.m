@@ -11,7 +11,7 @@ Beta_VBOX_mat = [Time Beta_VBOX];
 vx = vx_VBOX;
 t = Time;
 x0 = [-0.0103 0.1244 0.00052 0];
-T = Time(end);
+T = Time(end)+0.01;
 T_w = 1;
 
 %% MATLAB Bicycle Model Estimator
@@ -29,16 +29,16 @@ T_w = 1;
 % sim('washout_estimator');
 
 %% Simulink Full Estimator Model
-Cf_tune = 10000:10000:110000;
-Cr_tune = 10000:10000:110000;
-
-for i=1:length(Cf_tune)
-    Cf = Cf_tune(i);
-    for j=1:length(Cr_tune)
-        Cr = Cr_tune(j);
+% Cf_tune = 10000:10000:110000;
+% Cr_tune = 10000:10000:110000;
+% 
+% for i=1:length(Cf_tune)
+%     Cf = Cf_tune(i);
+%     for j=1:length(Cr_tune)
+%         Cr = Cr_tune(j);
         sim('Estimator_Model');
-    end
-end
+%     end
+% end
 
 %% Plot results
 figure(1);

@@ -7,3 +7,6 @@ Task 1a:
 Task 1a Results comments:
 
 The integrator has a weird result because of the bank angle at the Lunda airfield. The accelerometer always has a component of the bank angle and that eroors keeps adding up in the integrator with time.
+
+Task 1b:
+Cf and Cr only affect bicycle model. Finding one value for Cf and Cr that fit all manouvers.
