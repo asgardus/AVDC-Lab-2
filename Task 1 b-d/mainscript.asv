@@ -42,8 +42,8 @@ T_w = 1;
 %% Mean squared error
 for i=1:100
     j(i)=i;
-        tw(i)=i*0.005;
-        T_w=i*0.05;
+        tw(i)=i;
+        T_w=i;
          sim('Estimator_Model');
 %         err(i) = immse(beta_washout_main.data,Beta_VBOX);
        % CALCULATE THE ERROR VALES FOR THE ESTIMATE OF SLIP ANGLE
