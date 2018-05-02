@@ -17,6 +17,8 @@ taking tw=0.001 gives inf in LP filter.
 Slaloms-more importance to integrator, however prone to drift-would expect higher tw to give better result-less mse
 but due to drift creates more mse. Zero gives best mse (0.183)
 
+rectified vcog and beta_washout:
+crc-mse (lowest)=2.175e-4 (tw=2.05)
 
 
 

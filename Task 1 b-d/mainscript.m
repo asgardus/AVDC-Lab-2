@@ -41,8 +41,8 @@ T_w = 1;
 % end
 %% Mean squared error
 for i=1:100
-        tw(i)=i*0.1;
-        T_w=i;
+        tw(i)=i*0.05;
+        T_w=i*0.05;
          sim('Estimator_Model');
 %         err(i) = immse(beta_washout_main.data,Beta_VBOX);
        % CALCULATE THE ERROR VALES FOR THE ESTIMATE OF SLIP ANGLE
@@ -51,7 +51,8 @@ for i=1:100
 disp(' ');
 % fprintf('The MSE of Beta estimation is: %d \n',e_beta_mean(i));
 % fprintf('The Max error of Beta estimation is: %d \n',e_beta_max);
-mse(i)=e_beta_mean
+mse(i)=e_beta_mean;
+max(i)=e_beta_max;
 end
 figure (2)        
 plot(tw,mse)
