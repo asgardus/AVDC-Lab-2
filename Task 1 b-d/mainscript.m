@@ -39,6 +39,7 @@ T_w = 1;
 %         sim('Estimator_Model');
 %     end
 % end
+
 %% Mean squared error
 % for i=1:100
 %     j(i)=i;
@@ -55,11 +56,18 @@ T_w = 1;
 % mse(i)=e_beta_mean
 % max(i)=e_beta_max
 % end
-figure (2)        
-plot(tw,mse)
-% plot(tw,e_beta_max)
-hold on
-grid on
+% figure (2)        
+% plot(tw,mse)
+% % plot(tw,e_beta_max)
+% hold on
+% grid on
+
+%% Yaw acceleration dependent Time function
+m = 3;
+c = 0.02;
+Tau = 0.3;
+sim('Estimator_Model_T_variable');
+
 %% Plot results
 figure(1);
 plot(Time, Beta_VBOX, Time, beta_bicycle_sim_main.Data);
