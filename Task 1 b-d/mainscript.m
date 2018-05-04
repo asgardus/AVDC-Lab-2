@@ -1,3 +1,5 @@
+clear all
+
 Init_for_washout_filter;
 
 global WA_VBOX vx_VBOX Time
@@ -8,6 +10,7 @@ yawRate_VBOX_mat = [Time yawRate_VBOX];
 vx_VBOX_mat = [Time vx_VBOX];
 ay_VBOX_mat = [Time ay_VBOX];
 Beta_VBOX_mat = [Time Beta_VBOX];
+roll_angle_VBOX_mat = [Time roll_angle_VBOX];
 vx = vx_VBOX;
 t = Time;
 x0 = [-0.0103 0.1244 0.00052 0];

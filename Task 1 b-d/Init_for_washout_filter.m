@@ -111,8 +111,7 @@ ay_VBOX = vbo.channels(1, 37).data(trim_start:trim_end,1).*g;
 az_VBOX = vbo.channels(1, 41).data(trim_start:trim_end,1).*g;
 Beta_VBOX = vbo.channels(1, 30).data(trim_start:trim_end,1).*(pi/180);
 SWA_VBOX = vbo.channels(1, 9).data(trim_start:trim_end,1).*(pi/180);
-roll_angle_VBOX = vbo.channels(1, 28).data(trim_start:trim_end,1).*(pi/180);
-pitch_angle_VBOX = vbo.channels(1, 25).data(trim_start:trim_end,1).*(pi/180);
+roll_angle_VBOX = vbo.channels(1, 28).data(trim_start:trim_end,1).*(-pi/180);
 
 % Taking away spikes in the data
 for i=1:length(Time)
