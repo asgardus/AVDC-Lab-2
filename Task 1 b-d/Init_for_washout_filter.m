@@ -3,25 +3,30 @@
 % Following file is the start file for the Simulink implementation 
 % of the integration, model-based, and washout filter.
 %----------------------------------------------------------------
-clear all;
-close all;
-clc;
 addpath('scripts')
 addpath('logged_data')
 disp(' ');
 
 % Set global variables so that they can be accessed from other matlab
 % functions and files
-global vbox_file_name Cf Cr lf lr mass Iz vx_VBOX Time
+global vbox_file_name Cf Cr lf lr mass Iz vx_VBOX Time_data file
 %%
 %----------------------------
 % LOAD DATA FROM VBOX SYSTEM
 %----------------------------
-% vbox_file_name='logged_data/Lunda_test_140411/Stand_Still_no2.VBO'; %stand still logging, engine running
-% vbox_file_name='logged_data/Lunda_test_140411/Circle_left_R13m_no2.VBO'; %circle test left, roughly 13m in radius
-vbox_file_name='logged_data/Lunda_test_140411/Slalom_35kph.VBO'; %slalom entry to the left @ first cone, 35kph
-% vbox_file_name='logged_data/Lunda_test_140411/Step_Steer_left_80kph.VBO'; %Step steer to the left in 80kph
-% vbox_file_name='logged_data/Lunda_test_140411/SWD_80kph.VBO'; %Sine with dwell, first turn to the right, 80kph
+
+switch file
+    case 'stand'
+        vbox_file_name='logged_data/Lunda_test_140411/Stand_Still_no2.VBO'; %stand still logging, engine running
+    case 'crc'
+        vbox_file_name='logged_data/Lunda_test_140411/Circle_left_R13m_no2.VBO'; %circle test left, roughly 13m in radius
+    case 'sla'
+        vbox_file_name='logged_data/Lunda_test_140411/Slalom_35kph.VBO'; %slalom entry to the left @ first cone, 35kph
+    case 'step'
+        vbox_file_name='logged_data/Lunda_test_140411/Step_Steer_left_80kph.VBO'; %Step steer to the left in 80kph
+    case 'swd'
+        vbox_file_name='logged_data/Lunda_test_140411/SWD_80kph.VBO'; %Sine with dwell, first turn to the right, 80kph
+end
 
 vboload
 %  Channel 1  = satellites
@@ -99,10 +104,25 @@ g=9.81;             % Gravity constant (m/s^2)
 %--------------------------------------------
 % SET VARIABLES DATA FROM DATA READ FROM FILE
 %--------------------------------------------
-trim_start=1;
-trim_end=length(vbo.channels(1, 2).data)-1;
+switch file
+    case 'stand'
+        trim_start=1;
+        trim_end=length(vbo.channels(1, 2).data)-1;
+    case 'crc'
+        trim_start=1;
+        trim_end=8000;
+    case 'sla'
+        trim_start=1210;
+        trim_end=3300;
+    case 'step'
+        trim_start=2150;
+        trim_end=2700;
+    case 'swd'
+        trim_start=1650;
+        trim_end=2150;
+end
 
-Time=(vbo.channels(1, 2).data(trim_start:trim_end,1) - vbo.channels(1, 2).data(1,1));
+Time_data=(vbo.channels(1, 2).data(trim_start:trim_end,1) - vbo.channels(1, 2).data(trim_start,1));
 yawRate_VBOX = vbo.channels(1, 35).data(trim_start:trim_end,1).*(-pi/180); %signal is inverted hence (-)
 vx_VBOX = vbo.channels(1, 5).data(trim_start:trim_end,1)./3.6;
 vy_VBOX = vbo.channels(1, 26).data(trim_start:trim_end,1)./3.6;
@@ -114,7 +134,7 @@ SWA_VBOX = vbo.channels(1, 9).data(trim_start:trim_end,1).*(pi/180);
 roll_angle_VBOX = vbo.channels(1, 28).data(trim_start:trim_end,1).*(-pi/180);
 
 % Taking away spikes in the data
-for i=1:length(Time)
+for i=1:length(Time_data)
     if (i>1)
         if (abs(SWA_VBOX(i,1)-SWA_VBOX(i-1))>1 || abs(SWA_VBOX(i,1))>7)
             SWA_VBOX(i,1)=SWA_VBOX(i-1);

@@ -1,9 +1,26 @@
+%% Clearing workspace
 clear all
+clc
+
+%% Data Loading
+
+global WA_VBOX vx_VBOX Time_data file
+
+file = 'stand'; %specify file here according to below specified legend
+%'stand' - standstill       'crc' - circle test left        'swd' - sine dwell
+%'sla' - slaloms            'step' - step steer
 
 Init_for_washout_filter;
 
-global WA_VBOX vx_VBOX Time
-
+switch file
+    case 'sla'
+        Time1 = Time_data(1):0.01:Time_data(end)+0.01;
+    case 'stand'
+        Time1 = Time_data(1):0.01:Time_data(end)+0.01;
+    otherwise
+        Time1 = Time_data(1):0.01:Time_data(end);
+end
+Time = Time1';
 WA_VBOX = SWA_VBOX./Ks;
 WA_VBOX_mat = [Time WA_VBOX];
 yawRate_VBOX_mat = [Time yawRate_VBOX];
@@ -14,8 +31,8 @@ roll_angle_VBOX_mat = [Time roll_angle_VBOX];
 vx = vx_VBOX;
 t = Time;
 x0 = [-0.0103 0.1244 0.00052 0];
-T = Time(end)+0.01;
-T_w = 1;
+T = Time(end)-Time(1);
+T_w = 3.5;
 
 %% MATLAB Bicycle Model Estimator
 % [timeout,xout]=ode45('bicycle_estimator_mat', t, x0);
@@ -44,8 +61,9 @@ T_w = 1;
 % end
 
 %% Mean squared error
-m_mat=0:0.5:10;
-c_mat=0:0.1;
+m_mat=0.1:0.5:10;
+c_mat=eps:0.1;
+Tau = 0.3;
 for i=1:length(m_mat)
         m=m_mat(i);
         for j=1:length(c_mat)
@@ -58,15 +76,15 @@ for i=1:length(m_mat)
         end
 end
 figure(2);        
-plot(tw,mse)
-plot(tw,e_beta_max)
-hold on
+plot(mse)
+grid on
+figure(3);
+plot(max)
 grid on
 
 %% Yaw acceleration dependent Time function
 % m = 3;
 % c = 0.02;
-% Tau = 0.3;
 % sim('Estimator_Model_T_variable');
 
 %% Plot results
