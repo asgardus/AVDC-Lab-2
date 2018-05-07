@@ -44,33 +44,31 @@ T_w = 1;
 % end
 
 %% Mean squared error
-% for i=1:100
-%     j(i)=i;
-%         tw(i)=i*0.005;
-%         T_w=i*0.05;
-%          sim('Estimator_Model');
-% %         err(i) = immse(beta_washout_main.data,Beta_VBOX);
-%        % CALCULATE THE ERROR VALES FOR THE ESTIMATE OF SLIP ANGLE
-% %--------------------------------------------------------- 
-% [e_beta_mean,e_beta_max,time_at_max,error] = errorCalc(beta_washout_main.data, Beta_VBOX);
-% disp(' ');
-% % fprintf('The MSE of Beta estimation is: %d \n',e_beta_mean(i));
-% % fprintf('The Max error of Beta estimation is: %d \n',e_beta_max);
-% mse(i)=e_beta_mean
-% max(i)=e_beta_max
-% end
-% figure (2)        
-% plot(tw,mse)
-% % plot(tw,e_beta_max)
-% hold on
-% grid on
+m_mat=0:0.5:10;
+c_mat=0:0.1;
+for i=1:length(m_mat)
+        m=m_mat(i);
+        for j=1:length(c_mat)
+            c=c_mat(j);
+            sim('Estimator_Model_T_variable');
+            % CALCULATE THE ERROR VALES FOR THE ESTIMATE OF SLIP ANGLE             
+            [e_beta_mean,e_beta_max,time_at_max,error] = errorCalc(beta_washout_main.data, Beta_VBOX);
+            mse(i)=e_beta_mean;
+            max(i)=e_beta_max;
+        end
+end
+figure(2);        
+plot(tw,mse)
+plot(tw,e_beta_max)
+hold on
+grid on
 
 %% Yaw acceleration dependent Time function
-m = 3;
-c = 0.02;
-Tau = 0.3;
-sim('Estimator_Model_T_variable');
+% m = 3;
+% c = 0.02;
+% Tau = 0.3;
+% sim('Estimator_Model_T_variable');
 
 %% Plot results
-figure(1);
-plot(Time, Beta_VBOX, Time, beta_bicycle_sim_main.Data);
+% figure(1);
+% plot(Time, Beta_VBOX, Time, beta_bicycle_sim_main.Data);
